@@ -51,6 +51,9 @@ return require('packer').startup(function(use)
     }
 
     use 'glench/vim-jinja2-syntax' -- Nunjucks!!
-
+    use { -- git diffing
+        'sindrets/diffview.nvim',
+        requires = 'nvim-lua/plenary.nvim'
+    }
 end)
 
