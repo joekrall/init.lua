@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 
--- can't do <leader>pv in Colemak, howzabout "project ... oracle? organizer?"
-vim.keymap.set("n", "<leader>po", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- enable VSCode-like alt-arrow-key navigation using the J and K keys
 -- when in visual mode
