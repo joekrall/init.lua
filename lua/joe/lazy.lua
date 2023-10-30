@@ -16,9 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    tag = '0.1.4',
     -- or                            , branch = '0.1.x',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   {
@@ -32,7 +32,7 @@ require("lazy").setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
-     build = ':TSUpdate' ,
+    build = ':TSUpdate',
   },
   'nvim-treesitter/playground',
   'theprimeagen/harpoon',
@@ -44,14 +44,8 @@ require("lazy").setup({
     branch = 'v2.x',
     dependencies = {
       -- LSP Support
-      { 'neovim/nvim-lspconfig' }, -- Required
-      {                            -- Optional
-        'williamboman/mason.nvim',
-
-        build = function()
-          pcall(vim.cmd, 'MasonUpdate')
-        end,
-      },
+      { 'neovim/nvim-lspconfig' },             -- Required
+      { 'williamboman/mason.nvim', },          -- Optional
       { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
       -- Autocompletion
