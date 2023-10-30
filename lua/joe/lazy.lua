@@ -38,7 +38,7 @@ require("lazy").setup({
   'theprimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
-
+  'christoomey/vim-tmux-navigator',
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
