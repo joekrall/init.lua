@@ -23,7 +23,7 @@ require("lazy").setup({
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
     'rose-pine/neovim',
-    as = 'rose-pine',
+    name = 'rose-pine',
     config = function()
       require("rose-pine").setup()
       vim.cmd('colorscheme rose-pine')
