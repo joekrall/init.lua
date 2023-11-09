@@ -38,7 +38,6 @@ require("lazy").setup({
   'theprimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
-  'christoomey/vim-tmux-navigator',
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
@@ -54,7 +53,20 @@ require("lazy").setup({
       { 'L3MON4D3/LuaSnip' },     -- Required
     }
   },
-
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+    config = function()
+      vim.g.codeium_disable_bindings = 1
+      vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true })
+      vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
+      vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
+      vim.keymap.set('i', '<C-]>', function() return vim.fn['codeium#Clear']() end, { expr = true })
+      vim.keymap.set('i', '<M-Bslash>', function() return vim.fn['codeium#Complete']() end, { expr = true })
+      vim.g.codeium_filetypes = {
+        markdown = false,
+      }
+    end
+  },
   'glench/vim-jinja2-syntax' -- Nunjucks!!
-
 })
