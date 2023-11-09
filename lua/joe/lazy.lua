@@ -68,5 +68,11 @@ require("lazy").setup({
       }
     end
   },
+  {
+    'sbdchd/neoformat',
+    config = function()
+      vim.g.neoformat_try_node_exe = 1
+    end
+  },
   'glench/vim-jinja2-syntax' -- Nunjucks!!
 })
