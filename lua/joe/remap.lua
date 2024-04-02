@@ -36,7 +36,10 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 -- don't ever press Q
 vim.keymap.set("n", "Q", "<nop>")
 
+-- tmux-sessionizer in vim!
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+-- format the current buffer
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
