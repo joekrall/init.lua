@@ -50,6 +50,10 @@ require("lazy").setup({
     }
   },
   {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
     "github/copilot.vim",
   },
   'glench/vim-jinja2-syntax' -- Nunjucks!!
