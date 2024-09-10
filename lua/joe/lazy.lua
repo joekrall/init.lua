@@ -49,6 +49,10 @@ require("lazy").setup({
       { 'L3MON4D3/LuaSnip' },     -- Required
     }
   },
+  -- Lua
+  {
+    "shortcuts/no-neck-pain.nvim", version = "*"
+  },
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
