@@ -35,13 +35,33 @@ require("lazy").setup({
   'mbbill/undotree',
   'tpope/vim-fugitive',
   -- LSP Support
-  'neovim/nvim-lspconfig',                   -- Required
-  'williamboman/mason.nvim',                 -- Optional
-  'williamboman/mason-lspconfig.nvim',       -- Optional
+  'neovim/nvim-lspconfig',             -- Required
+  'williamboman/mason.nvim',           -- Optional
+  'williamboman/mason-lspconfig.nvim', -- Optional
   -- Autocompletion
-  'hrsh7th/nvim-cmp',           -- Required
-  'hrsh7th/cmp-nvim-lsp',       -- Required
-  'L3MON4D3/LuaSnip',           -- Required
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
+  },                      -- Required
+  'hrsh7th/cmp-nvim-lsp', -- Required
+  'L3MON4D3/LuaSnip',     -- Required
   -- Lua
   {
     "shortcuts/no-neck-pain.nvim", version = "*"
