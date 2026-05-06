@@ -53,18 +53,27 @@ require('mason-lspconfig').setup({
 vim.lsp.config('*', { capabilities = require('cmp_nvim_lsp').default_capabilities() })
 
 local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = {
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  ['<C-Space>'] = cmp.mapping.complete(),
-}
 
 cmp.setup({
   sources = { { name = 'nvim_lsp' } },
-  mapping = cmp.mapping.preset.insert(cmp_mappings),
+  mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      local col = vim.fn.col('.') - 1
+      if cmp.visible() then
+        cmp.select_next_item({ behavior = 'select' })
+      elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        fallback()
+      else
+        cmp.complete()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+  }),
   snippet = { expand = function(args) require('luasnip').lsp_expand(args.body) end },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentaion = cmp.config.window.bordered()
+  }
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
