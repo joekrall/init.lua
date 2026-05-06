@@ -50,11 +50,54 @@ require('mason-lspconfig').setup({
   }
 })
 
+local kind_icons = {
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰜢",
+  Variable = "󰀫",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "",
+}
+
 vim.lsp.config('*', { capabilities = require('cmp_nvim_lsp').default_capabilities() })
 
 local cmp = require('cmp')
+--local lspkind = require('lspkind')
 
 cmp.setup({
+  formatting = {
+    fields = { 'abbr', 'icon', 'kind', 'menu' },
+    format = function(entry, vim_item)
+      vim_item.kind = string.format('%s  %s', kind_icons[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        luasnip = "[Snippet]",
+        buffer = "[Buffer]",
+        path = "[Path]",
+      })[entry.source.name]
+
+      return vim_item
+    end
+  },
   sources = { { name = 'nvim_lsp' } },
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp.mapping(function(fallback)
