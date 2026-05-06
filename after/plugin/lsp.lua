@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- else
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     -- end
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "rounded" }) end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     --    vim.keymap.set("n", "<leader>n", function() vim.fn.VSCodeNotify("workbench.action.files.newUntitledFile") end)
     --    vim.keymap.set("n", "<C-s>", function() vim.fn.VSCodeNotify("workbench.action.files.save") end)

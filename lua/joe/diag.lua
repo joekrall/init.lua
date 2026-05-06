@@ -7,3 +7,7 @@ else
   vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
   vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end)
 end
+
+vim.diagnostic.config({
+  float = { border = "rounded" },
+})
