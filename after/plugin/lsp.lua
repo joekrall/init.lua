@@ -15,13 +15,6 @@ require('mason-lspconfig').setup({
       vim.lsp.enable('ts_ls')
     end,
 
-    eslint = function()
-      vim.lsp.config('eslint', {
-        root_markers = { 'eslint.config.js', 'eslint.config.mjs', '.eslintrc.js', '.eslintrc.json', 'package.json', '.git' },
-      })
-      vim.lsp.enable('eslint')
-    end,
-
     cssls = function()
       vim.lsp.config('cssls', {
         root_markers = { 'package.json', '.git' },
@@ -49,6 +42,27 @@ require('mason-lspconfig').setup({
     end,
   }
 })
+
+vim.lsp.config('eslint', {
+  root_dir = function(bufnr, on_dir)
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    if bufname == '' then return end
+
+    local match = vim.fs.find({
+      'eslint.config.js', 'eslint.config.mjs', '.eslintrc.js', '.eslintrc.json', 'package.json', '.git'
+    }, {
+      path = vim.fs.dirname(bufname),
+      upward = true,
+      type = 'file'
+    })[1]
+
+    if match then
+      on_dir(vim.fs.dirname(match))
+    end
+  end,
+})
+
+vim.lsp.enable('eslint')
 
 local kind_icons = {
   Text = "󰉿",
